@@ -5,16 +5,14 @@
 </template>
 
 <script>
-import * as API from "../../api/admin/index";
-export default {
-  data() {
-    return {};
-  },
-  created() {
-    API.systemIndex();
-    API.getAllStoreOrder();
-    API.getAllWarehouseOrder();
-  }
-};
+export default {};
 </script>
 
+<style lang="less">
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+}
+</style>

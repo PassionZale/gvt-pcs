@@ -3,7 +3,7 @@
     <Breadcrumb :style="{marginBottom:'16px'}">
         <template v-for="nav in navs" v-if="nav.path !== ''">
             <BreadcrumbItem>
-                {{ nav.name }}
+                {{ nav.meta.title }}
             </BreadcrumbItem>
         </template>
     </Breadcrumb>

@@ -13,7 +13,7 @@ export const RouterMap = [
         component: Layout,
         redirect: '/home',
         children: [
-            { path: 'home', name: 'home', component: _import('Home'), meta: {title: '首页'}},
+            { path: 'home', name: 'home', component: _import('Home'), meta: {title: '控制台'}},
             { path: 'store', name: 'store', component: _import('Store'), meta: {title: '门店管理'} },
             { path: 'warehouse', name: 'warehouse', component: _import('Warehouse'), meta: {title: '仓库管理'} },
             { path: 'purchase', name: 'purchase', component: _import('Purchase'), meta: {title: '采购管理'} },

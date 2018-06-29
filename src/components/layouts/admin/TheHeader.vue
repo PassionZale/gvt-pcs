@@ -4,7 +4,7 @@
         <Col span="12" :style="{textAlign:'left'}">
           <router-link :to="{ path: '/' }">
             <img src="/src/assets/logo.png" style="width:auto;height:32px;vertical-align:middle;"/>
-            <span style="color:#495060;">{{ user.username }}</span>
+            <span style="color:#495060;margin-left: 10px;">{{ '欢迎, ' + user.username }}</span>
           </router-link>
         </Col>
         <Col span="12" :style="{textAlign:'right'}">
