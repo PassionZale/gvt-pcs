@@ -1,6 +1,6 @@
 /**
  * 管理员
- * 首页 API LIST
+ * 控制台 API LIST
  */
 
 import ajax from '../../utils/ajax'

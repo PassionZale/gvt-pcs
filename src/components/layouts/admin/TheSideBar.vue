@@ -3,7 +3,7 @@
     <Menu width="200px" theme="light" :active-name="active_route_name" :style="{height: '100%'}">
 
         <!--控制台-->
-        <router-link :to="{ path: '/' }">
+        <router-link :to="{ path: '/' }" exact>
             <MenuItem name="home">
                 <Icon type="home"></Icon>
                 控制台

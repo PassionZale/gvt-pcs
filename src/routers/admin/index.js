@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '../../components/layouts/admin/Index.vue'
+import storeRouter from './storeRouter'
 import errorPage from '../../views/404.vue'
 
 Vue.use(VueRouter);
@@ -14,7 +15,7 @@ export const RouterMap = [
         redirect: '/home',
         children: [
             { path: 'home', name: 'home', component: _import('Home'), meta: {title: '控制台'}},
-            { path: 'store', name: 'store', component: _import('Store'), meta: {title: '门店管理'} },
+            storeRouter,
             { path: 'warehouse', name: 'warehouse', component: _import('Warehouse'), meta: {title: '仓库管理'} },
             { path: 'purchase', name: 'purchase', component: _import('Purchase'), meta: {title: '采购管理'} },
             { path: 'order', name: 'order', component: _import('Order'), meta: {title:'订单管理'}},

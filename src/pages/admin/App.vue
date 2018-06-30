@@ -15,4 +15,17 @@ input:focus,
 textarea:focus {
   outline: none;
 }
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+.router-link-active {
+  li {
+    color: #2d8cf0;
+    border-right: 2px solid #2d8cf0;
+    z-index: 2;
+  }
+}
 </style>
