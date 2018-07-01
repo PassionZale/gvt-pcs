@@ -58,7 +58,7 @@
         <hr>
         <!-- START 仓库订单信息统计 -->
         <h3>仓库订单信息统计</h3>
-        <Table stripe :columns="storeTable.columns" :data="warehouseTable.data" :loading="storeTable.loading"></Table>
+        <Table stripe :columns="warehouseTable.columns" :data="warehouseTable.data" :loading="storeTable.loading"></Table>
         <!-- /END 仓库订单信息统计 -->
     </div>
 </template>
@@ -73,30 +73,28 @@ export default {
       storeTable: {
         loading: true,
         data: [],
-      columns: [
-        { title: "门店名称", key: "storeName" },
-        { title: "订单总数", key: "proBarcode" },
-        { title: "采购单总数", key: "stPchSum" },
-        { title: "订单销售额", key: "proClass" },
-        { title: "采购单销售额", key: "stPchTotal" },
-        { title: "订单商品总数", key: "storeValidity" },
-        { title: "采购商品总数", key: "stPchNumber" }
-      ],
-
+        columns: [
+          { title: "门店名称", key: "storeName" },
+          { title: "订单总数", key: "proBarcode" },
+          { title: "采购单总数", key: "stPchSum" },
+          { title: "订单销售额", key: "proClass" },
+          { title: "采购单销售额", key: "stPchTotal" },
+          { title: "订单商品总数", key: "storeValidity" },
+          { title: "采购商品总数", key: "stPchNumber" }
+        ]
       },
       warehouseTable: {
         loading: true,
         data: [],
-      columns: [
-        { title: "仓库名称", key: "waehouseName" },
-        { title: "订单总数", key: "proBarcode" },
-        { title: "采购单总数", key: "stPchSum" },
-        { title: "订单销售额", key: "proClass" },
-        { title: "采购单销售额", key: "stPchTotal" },
-        { title: "订单商品总数", key: "storeValidity" },
-        { title: "采购商品总数", key: "stPchNumber" }
-      ],
-
+        columns: [
+          { title: "仓库名称", key: "waehouseName" },
+          { title: "订单总数", key: "proBarcode" },
+          { title: "采购单总数", key: "stPchSum" },
+          { title: "订单销售额", key: "proClass" },
+          { title: "采购单销售额", key: "stPchTotal" },
+          { title: "订单商品总数", key: "storeValidity" },
+          { title: "采购商品总数", key: "stPchNumber" }
+        ]
       }
     };
   },

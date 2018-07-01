@@ -17,3 +17,19 @@ export function managerStore(data = baseParams) {
     url
   });
 }
+
+export function getAllwarehouse() {
+  return ajax({
+    method: 'get',
+    url: '/warehouse/getAllwarehouse'
+  })
+}
+
+export function listStorePros(data = baseParams) {
+  let api = '/store/listStorePros';
+  let url = serializeGetUrl(api, data)
+  return ajax({
+    method: 'get',
+    url
+  })
+}

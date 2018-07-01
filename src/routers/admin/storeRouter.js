@@ -10,6 +10,7 @@ const storeRouter = {
             {path: 'list', name:"store-list", component: _import('store/StoreList'), meta: {title: '门店列表'}},
             {path: 'edit/:id', name:"store-edit", component: _import('store/StoreEdit'), meta: {title: '门店编辑'}},
             {path: 'create', name:"store-create", component: _import('store/StoreCreate'), meta: {title: '门店创建'}},
+            {path: 'pros/:storeName', name:"store-pros", component: _import('store/StorePros'), meta: {title: '门店商品'}},
         ]
 };
 
