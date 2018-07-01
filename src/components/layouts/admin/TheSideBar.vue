@@ -52,25 +52,25 @@
 
         <!--系统管理-->
         <MenuGroup title="系统管理">
-            <router-link :to="{path: '/system-param'}">
+            <router-link :to="{path: '/system/param'}">
                 <MenuItem name="system-param">
                     <Icon type="gear-a"></Icon>
                     系统参数
                 </MenuItem>
             </router-link>
-            <router-link :to="{path: '/system-notify'}">
+            <router-link :to="{path: '/system/notify'}">
                 <MenuItem name="system-notify">
                     <Icon type="android-warning"></Icon>
                     系统通知
                 </MenuItem>
             </router-link>
-            <router-link :to="{path: '/system-address'}">
+            <router-link :to="{path: '/system/address'}">
                 <MenuItem name="system-address">
                     <Icon type="location"></Icon>
                     送货地址
                 </MenuItem>
             </router-link>
-            <router-link :to="{path: '/system-log'}">
+            <router-link :to="{path: '/system/log'}">
                 <MenuItem name="system-log">
                     <Icon type="ionic"></Icon>
                     系统日志
