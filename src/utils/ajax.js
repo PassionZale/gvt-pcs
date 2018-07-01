@@ -22,7 +22,7 @@ ajax.interceptors.response.use(response => {
 }, error => {
   if (error.response.status >= 400) {
     // TODO 跳转登录
-    Message.error('出现异常');
+    // Message.error('出现异常');
   }
   return Promise.reject(error);
 });

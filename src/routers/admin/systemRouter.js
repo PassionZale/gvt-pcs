@@ -17,7 +17,7 @@ const systemRouter = {
       }
     },
     {
-      path: 'notify',
+      path: 'notify/',
       name: 'system-notify',
       component: _import('system/SystemNotify'),
       meta: {

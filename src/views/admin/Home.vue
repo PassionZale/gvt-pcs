@@ -9,11 +9,10 @@
                         快速入口
                     </p>
                     <Badge :count="entryData.storeNum">
-                        <Button type="primary">门店绑定仓库申请</Button>
-                        <a href="#" class="demo-badge"></a>
+                        <Button type="primary" @click="handleEntry('warehouse')">门店绑定仓库申请</Button>              
                     </Badge>
                     <Badge :count="entryData.warehouseNum">
-                        <Button type="primary">促销商品推送申请</Button>
+                        <Button type="primary" @click="handleEntry('pros')">促销商品推送申请</Button>
                     </Badge>
                 </Card>
             </Col>
@@ -130,6 +129,9 @@ export default {
         .catch(error => {
           this.btnLoading = false;
         });
+    },
+    handleEntry(tab) {
+      this.$router.push({ name: "system-notify", query: { tab } });
     }
   }
 };
