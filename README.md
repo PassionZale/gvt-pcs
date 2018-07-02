@@ -187,6 +187,7 @@ export default {
 ```
 
 ### 9. TEMPLATE
+
 编写视图模板
 
 ```html
@@ -237,4 +238,9 @@ export default {
 
     </div>
 </template>
+```
+
+### 10. EXAMPLE
+``` shell
+./src/views/admin/system/SystemAddress.vue
 ```
