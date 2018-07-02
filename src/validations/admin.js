@@ -78,3 +78,11 @@ export const SEARCH_SYSTEM_ADDRESS_FORM_VALIDATION = {
   // 仓库名称
   'outboundNo': [default_max_rule]
 }
+
+// 系统管理=>系统日志=>搜索表单验证器
+export const SEARCH_SYSTEM_LOG_FORM_VALIDATION = {
+  // 用户名
+  'userName': [default_max_rule],
+  // 用户类型
+  'userType': [default_max_rule],
+}

@@ -2,15 +2,15 @@
     <div>
         
         <!-- START 搜索表单 -->
-        <Form ref="searchForm" :model="form.data" :rules="form.rules" inline>
-            <FormItem prop="storeName">
+        <Form ref="searchForm" :model="form.data" :rules="form.rules" :label-width="80" inline>
+            <FormItem label="出库单号:" prop="outboundNo">
+                <Input type="text" v-model="form.data.outboundNo" placeholder="请输入出库单号"></Input>
+            </FormItem>
+            <FormItem label="门店名称:" prop="storeName">
                 <Input type="text" v-model="form.data.storeName" placeholder="请输入门店名称"></Input>
             </FormItem>
-            <FormItem prop="wareName">
-                <Input type="text" v-model="form.data.wareName" placeholder="请输入门店编号"></Input>
-            </FormItem>
-            <FormItem prop="outboundNo">
-                <Input type="text" v-model="form.data.outboundNo" placeholder="请输入仓库名称"></Input>
+            <FormItem label="仓库名称:" prop="wareName">
+                <Input type="text" v-model="form.data.wareName" placeholder="请输入仓库名称"></Input>
             </FormItem>
             <FormItem>
                 <Button type="primary" @click="handleSubmit('searchForm')">搜索</Button>
@@ -165,17 +165,16 @@ export default {
     },
     handleConfirmBtn(index) {
       let stockNo = this.table.data[index]["stockNo"];
-      updateConfrimOrder({stockNo})
+      updateConfrimOrder({ stockNo })
         .then(response => {
-            if(response.success){
-                this.$Message.success('操作成功');
-                this.table.data[index]["stockConfirmLibrary"] = 2;
-            }else{
-                this.$Message.success('操作失败');
-            }
+          if (response.success) {
+            this.$Message.success("操作成功");
+            this.table.data[index]["stockConfirmLibrary"] = 2;
+          } else {
+            this.$Message.success("操作失败");
+          }
         })
         .catch();
-      
     }
   }
 };

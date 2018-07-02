@@ -26,7 +26,7 @@ export function goodsNotices(data = baseParams) {
   })
 }
 
-export function getGoodsDetail(data){
+export function getGoodsDetail(data) {
   return ajax({
     method: 'post',
     url: '/notices/getGoodsDetail',
@@ -34,7 +34,7 @@ export function getGoodsDetail(data){
   })
 }
 
-export function selectAdminListOfOrders(data = baseParams){
+export function selectAdminListOfOrders(data = baseParams) {
   let api = '/system/selectAdminListOfOrders';
   let url = serializeGetUrl(api, data)
   return ajax({
@@ -43,11 +43,23 @@ export function selectAdminListOfOrders(data = baseParams){
   });
 }
 
-export function updateConfrimOrder(data){
+export function updateConfrimOrder(data) {
   return ajax({
     method: 'post',
     url: '/system/updateConfrimOrder',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    // 嗯哼, 有的接口参数是 JSON, 有的又要 key=value 字符串, 就问你怕不怕?
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
     data: qs.stringify(data)
+  })
+}
+
+export function managerSystemUserLogs(data = baseParams) {
+  let api = '/system/managerSystemUserLogs';
+  let url = serializeGetUrl(api, data)
+  return ajax({
+    method: 'get',
+    url
   })
 }
