@@ -57,7 +57,7 @@
         <hr>
         <!-- START 仓库订单信息统计 -->
         <h3>仓库订单信息统计</h3>
-        <Table stripe :columns="warehouseTable.columns" :data="warehouseTable.data" :loading="storeTable.loading"></Table>
+        <Table stripe :columns="warehouseTable.columns" :data="warehouseTable.data" :loading="warehouseTable.loading"></Table>
         <!-- /END 仓库订单信息统计 -->
     </div>
 </template>
