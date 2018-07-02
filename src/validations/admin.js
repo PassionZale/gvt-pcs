@@ -86,3 +86,9 @@ export const SEARCH_SYSTEM_LOG_FORM_VALIDATION = {
   // 用户类型
   'userType': [default_max_rule],
 }
+
+// 采购管理=>采购列表=>搜索表单验证器
+export const SEARCH_PURCHASE_LIST_FORM_VALIDATION = {
+  // 采购单号
+  'buylistNo': [default_max_rule],
+}
