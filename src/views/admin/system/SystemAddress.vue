@@ -48,7 +48,10 @@
 
 <script>
 import { baseParams } from "../../../utils/base";
-import { selectAdminListOfOrders } from "../../../api/admin/system";
+import {
+  selectAdminListOfOrders,
+  updateConfrimOrder
+} from "../../../api/admin/system";
 import { SEARCH_SYSTEM_ADDRESS_FORM_VALIDATION } from "../../../validations/admin";
 export default {
   data() {
@@ -86,11 +89,11 @@ export default {
                     props: {
                       type: "primary",
                       size: "small",
-                      icon: "checkmark",
-                      on: {
-                        click: () => {
-                          this.handleConfirmBtn(this.params.rows);
-                        }
+                      icon: "checkmark"
+                    },
+                    on: {
+                      click: () => {
+                        this.handleConfirmBtn(params.index);
                       }
                     }
                   },
@@ -160,8 +163,19 @@ export default {
     handleReset(name) {
       this.$refs[name].resetFields();
     },
-    handleConfirmBtn(row) {
-        console.log(row)
+    handleConfirmBtn(index) {
+      let stockNo = this.table.data[index]["stockNo"];
+      updateConfrimOrder({stockNo})
+        .then(response => {
+            if(response.success){
+                this.$Message.success('操作成功');
+                this.table.data[index]["stockConfirmLibrary"] = 2;
+            }else{
+                this.$Message.success('操作失败');
+            }
+        })
+        .catch();
+      
     }
   }
 };

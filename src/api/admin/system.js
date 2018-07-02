@@ -8,6 +8,7 @@ import {
   baseParams,
   serializeGetUrl
 } from '../../utils/base'
+import qs from 'qs'
 
 export function storeNotices(data = baseParams) {
   return ajax({
@@ -40,4 +41,13 @@ export function selectAdminListOfOrders(data = baseParams){
     method: 'get',
     url
   });
+}
+
+export function updateConfrimOrder(data){
+  return ajax({
+    method: 'post',
+    url: '/system/updateConfrimOrder',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    data: qs.stringify(data)
+  })
 }
