@@ -12,6 +12,12 @@ onSize (pageSize) {
 },
 ```
 
+## FEATURES
+1. views/admin/store/StoreCreate.vue 创建门店的交互待完成
+2. views/admin/system/SystemNotify.vue 促销商品推送申请, 点击详情按钮后的"同意"、"拒绝"等操作交互待完成
+3. views/admin/system/SystemNotify.vue 仓库绑定门店申请, "同意"、"拒绝"等操作交互待完成
+
+
 ## TODOS
 1. 编写 mixins 全局注入, 监听 window.resize
 2. 在 window.resize 中动态计算 Table 的高度及宽度

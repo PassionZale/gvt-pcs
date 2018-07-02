@@ -3,7 +3,7 @@ import {
   baseURL
 } from './base'
 import {
-  Message
+  Notice
 } from 'iview'
 
 const ajax = axios.create({
@@ -20,10 +20,14 @@ ajax.interceptors.request.use(config => {
 ajax.interceptors.response.use(response => {
   return response.data;
 }, error => {
-  if (error.response.status >= 400) {
-    // TODO 跳转登录
-    Message.error('未登陆');
-  }
+  Notice.error({
+    title: `${error.response.status} ERROR`,
+    desc: error.response.data,
+    duration: 0
+  });
+  // if (error.response.status >= 400) {
+  // TODO 跳转登录
+  // }
   return Promise.reject(error);
 });
 

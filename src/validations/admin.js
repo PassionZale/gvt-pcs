@@ -18,10 +18,10 @@ const default_require_rule = {
 
 
 // 门店管理 => 门店列表 => 搜索门店表单验证器
-// storeName: 门店名称
-// storeNo: 门店编号
 export const SEARCH_STORE_FORM_VALIDATION = {
+  // 门店名称
   'storeName': [default_max_rule],
+  // 门店编号
   'storeNo': [default_max_rule],
 }
 
@@ -60,3 +60,12 @@ export const SEARCH_STORE_PROS_FORM_VALIDATION = {
   // 商品条码
   'proBarcode': [default_max_rule]
 }
+
+// 系统管理=>系统通知=>搜索表单验证器
+export const SEARCH_SYSTEM_NOTIFY_FORM_VALIDATION = {
+  // 用户名
+  'userName': [default_max_rule],
+  // 用户类型
+  'userType': [default_max_rule]
+}
+
