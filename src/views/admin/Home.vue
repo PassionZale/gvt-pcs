@@ -109,7 +109,7 @@ export default {
       });
     API.getAllWarehouseOrder()
       .then(response => {
-        this.storeTable.loading = false;
+        this.warehouseTable.loading = false;
         this.warehouseTable.data = response.rows;
       })
       .catch(error => {

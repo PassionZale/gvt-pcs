@@ -10,7 +10,7 @@
                 <Input type="text" v-model="form.data.wareName" placeholder="请输入门店编号"></Input>
             </FormItem>
             <FormItem prop="outboundNo">
-                <Input type="text" v-model="form.data.outboundNo" placeholder="请输入门店编号"></Input>
+                <Input type="text" v-model="form.data.outboundNo" placeholder="请输入仓库名称"></Input>
             </FormItem>
             <FormItem>
                 <Button type="primary" @click="handleSubmit('searchForm')">搜索</Button>
@@ -73,7 +73,46 @@ export default {
           { title: "门店经维度", key: "stockLatitude" },
           { title: "仓库经维度", key: "warehouseLatitude" },
           { title: "出库时间", key: "stockCTime" },
-          { title: "出库时间", key: "CRUD" }
+          { title: "出库时间", key: "stockCTime" },
+          {
+            title: "操作",
+            key: "CURD",
+            render: (h, params) => {
+              if (params.row.stockConfirmLibrary === 1) {
+                // 确认 按钮
+                return h(
+                  "Button",
+                  {
+                    props: {
+                      type: "primary",
+                      size: "small",
+                      icon: "checkmark",
+                      on: {
+                        click: () => {
+                          this.handleConfirmBtn(this.params.rows);
+                        }
+                      }
+                    }
+                  },
+                  "确认"
+                );
+              } else {
+                //  已确认 按钮 DISABLED
+                return h(
+                  "Button",
+                  {
+                    props: {
+                      type: "success",
+                      size: "small",
+                      icon: "checkmark",
+                      disabled: true
+                    }
+                  },
+                  "已确认"
+                );
+              }
+            }
+          }
         ]
       },
       pagination: {
@@ -120,6 +159,9 @@ export default {
     },
     handleReset(name) {
       this.$refs[name].resetFields();
+    },
+    handleConfirmBtn(row) {
+        console.log(row)
     }
   }
 };
