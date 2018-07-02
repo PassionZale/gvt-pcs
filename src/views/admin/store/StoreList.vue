@@ -126,6 +126,10 @@ export default {
                     },
                     on: {
                       click: () => {
+                        this.$Notice.warning({
+                          title: "TODO",
+                          desc: '同步数据交互暂未完成'
+                        });
                         // this.refresh(params.row.id);
                       }
                     }
@@ -142,7 +146,11 @@ export default {
                     },
                     on: {
                       click: () => {
-                        this.edit(params);
+                        this.$Notice.warning({
+                          title: "TODO",
+                          desc: '获取指定门店数据 API MISSING'
+                        });
+                        //this.edit(params);
                       }
                     }
                   },

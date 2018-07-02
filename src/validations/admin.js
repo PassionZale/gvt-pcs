@@ -69,3 +69,12 @@ export const SEARCH_SYSTEM_NOTIFY_FORM_VALIDATION = {
   'userType': [default_max_rule]
 }
 
+// 系统管理=>送货地址=>搜索表单验证器
+export const SEARCH_SYSTEM_ADDRESS_FORM_VALIDATION = {
+  // 出库单号
+  'storeName': [default_max_rule],
+  // 门店名称
+  'wareName': [default_max_rule],
+  // 仓库名称
+  'outboundNo': [default_max_rule]
+}

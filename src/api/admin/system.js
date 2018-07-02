@@ -32,3 +32,12 @@ export function getGoodsDetail(data){
     data
   })
 }
+
+export function selectAdminListOfOrders(data = baseParams){
+  let api = '/system/selectAdminListOfOrders';
+  let url = serializeGetUrl(api, data)
+  return ajax({
+    method: 'get',
+    url
+  });
+}
