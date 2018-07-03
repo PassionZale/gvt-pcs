@@ -110,8 +110,20 @@ export default {
           },
           { title: "发起门店", key: "initiateStore" },
           { title: "指定仓库", key: "specifiedWarehouse" },
-          { title: "采购时间", key: "procureTime" },
-          { title: "出库时间", key: "procureTime" },
+          {
+            title: "采购时间",
+            key: "procureTime",
+            render: (h, params) => {
+              return h("span", params.row.procureTime.replace(".0", ""));
+            }
+          },
+          {
+            title: "出库时间",
+            key: "procureTime",
+            render: (h, params) => {
+              return h("span", params.row.procureTime.replace(".0", ""));
+            }
+          },
           {
             title: "状态",
             key: "procureStatus",
