@@ -51,7 +51,7 @@
               @click.prevent.native="handleCheckAll">全选</Checkbox>
         </div>
         <CheckboxGroup v-model="formData.checkedWarehouseList" @on-change="handleWarehouseChange">
-            <Checkbox v-for="item in warehouses" :key="item.warehouseId" :label="item.warehouseName"></Checkbox>
+            <Checkbox v-for="item in warehouses" :key="item.warehouseId" :label="item.warehouseId">{{item.warehouseId}}</Checkbox>
         </CheckboxGroup>
       </FormItem>
       <hr>
@@ -84,15 +84,24 @@ export default {
         latitude: "",
         detailAddress: "",
         storeAbn: "",
-        checkedWarehouseList: []
+        checkedWarehouseList: [],
+        unCheckedWarehouseList: []
       },
       formRule: CREATE_STORE_FORM_VALIDATION
     };
+  },
+  computed: {
+    $warehouseIds() {
+      return this.warehouses.map(item => {
+        return item.warehouseId;
+      });
+    }
   },
   created() {
     getAllwarehouse()
       .then(response => {
         this.warehouses = response;
+        this.formData.unCheckedWarehouseList = this.$warehouseIds;
       })
       .catch();
   },
@@ -106,14 +115,17 @@ export default {
       this.indeterminate = false;
 
       if (this.checkAll) {
-        this.formData.checkedWarehouseList = this.warehouses.map(item => {
-          return item.warehouseName;
-        });
+        this.formData.checkedWarehouseList = this.$warehouseIds;
+        this.formData.unCheckedWarehouseList = [];
       } else {
         this.formData.checkedWarehouseList = [];
+        this.formData.unCheckedWarehouseList = this.$warehouseIds;
       }
     },
     handleWarehouseChange(data) {
+      this.formData.unCheckedWarehouseList = this.$warehouseIds.filter(item => {
+        return this.formData.checkedWarehouseList.indexOf(item) === -1
+      });
       let len = this.warehouses.length;
       if (data.length === len) {
         this.indeterminate = false;

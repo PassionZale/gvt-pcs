@@ -63,11 +63,8 @@
 
 <script>
 import { baseParams, parseAmount } from "../../../utils/base";
-import {
-  getAllStore,
-  getAllwarehouse,
-  managerPurchase
-} from "../../../api/admin/purchase";
+import { getAllStore, getAllwarehouse } from "../../../api/admin/purchase";
+import { managerOrder } from "../../../api/admin/order";
 import { SEARCH_PURCHASE_LIST_FORM_VALIDATION } from "../../../validations/admin";
 export default {
   data() {
@@ -91,25 +88,24 @@ export default {
         data: [],
         columns: [
           {
-            title: "采购单号",
-            key: "procureNo",
+            title: "订单号",
+            key: "orderNo",
             render: (h, params) => {
               return h(
                 "a",
                 {
                   attrs: {
                     title: `点击查看详情`,
-                    href: `#/purchase/detail/${params.row.procureNo}`
+                    href: `#/order/detail/${params.row.orderNo}`
                   }
                 },
-                params.row.procureNo
+                params.row.orderNo
               );
             }
           },
           { title: "发起门店", key: "initiateStore" },
           { title: "指定仓库", key: "specifiedWarehouse" },
-          { title: "采购时间", key: "procureTime" },
-          { title: "出库时间", key: "procureTime" },
+          { title: "订单时间", key: "orderTime" },
           {
             title: "状态",
             key: "procureStatus",
@@ -117,26 +113,17 @@ export default {
               let status = params.row.procureStatus;
               let text = "";
               switch (status) {
-                case "-1":
-                  text = "已拒绝";
-                  break;
                 case "1":
-                  text = "待确认";
+                  text = "待付款";
                   break;
                 case "2":
-                  text = "已付款";
-                  break;
-                case "3":
                   text = "待发货";
                   break;
-                case "4":
+                case "3":
                   text = "待收货";
                   break;
-                case "5":
+                case "4":
                   text = "已完成";
-                  break;
-                case "6":
-                  text = "待付款";
                   break;
                 default:
                   text = "";
@@ -147,10 +134,10 @@ export default {
             }
           },
           {
-            title: "采购金额",
-            key: "purchaseMoney",
+            title: "订单金额",
+            key: "orderMoney",
             render: (h, params) => {
-              let number = parseAmount(params.row.purchaseMoney);
+              let number = parseAmount(params.row.orderMoney);
               return h("strong", number);
             }
           }
@@ -189,7 +176,7 @@ export default {
       let rows = this.pagination.pageSize;
       let options = Object.assign({}, baseParams, { page, rows });
       let params = Object.assign({}, options, this.form.data);
-      managerPurchase(params)
+      managerOrder(params)
         .then(response => {
           this.pagination.total = response.total;
           this.table.data = response.rows;

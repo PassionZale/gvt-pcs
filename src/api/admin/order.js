@@ -9,25 +9,21 @@ import {
   serializeGetUrl
 } from '../../utils/base'
 
-export function getAllStore() {
-  return ajax({
-    method: 'get',
-    url: '/store/getAllStore'
-  })
-}
-
-export function getAllwarehouse() {
-  return ajax({
-    method: 'get',
-    url: '/store/getAllwarehouse'
-  })
-}
-
-export function managerPurchase(data = baseParams) {
-  let api = '/purchase/managerPurchase';
+export function managerOrder(data = baseParams) {
+  let api = '/order/managerOrder'
   let url = serializeGetUrl(api, data)
   return ajax({
     method: 'get',
     url
   })
+}
+
+export function managerListOrderPros(data = baseParams) {
+  let api = '/order/managerListOrderPros'
+  let url = serializeGetUrl(api, data)
+  return ajax({
+    method: 'get',
+    url
+  })
+
 }

@@ -17,7 +17,7 @@ const orderRouter = {
       title: '订单列表'
     }
   }, {
-    path: 'detail',
+    path: 'detail/:orderNo',
     name: "order-detail",
     component: _import('order/OrderDetail'),
     meta: {
