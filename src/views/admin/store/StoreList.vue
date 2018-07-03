@@ -1,5 +1,13 @@
 <template>
-    <div>
+    <div style="position: relative;">
+
+      <!-- Loading -->
+      <Spin fix v-show="spinShow">
+        <Icon type="load-c" size=18 class="spin-icon-load"></Icon>
+        <div>正在同步数据,请稍后...</div>
+      </Spin>
+
+
       <!-- START 搜索表单 -->
       <Form ref="searchForm" :model="searchForm.data" :rules="searchForm.validation" inline>
           <FormItem prop="storeName">
@@ -40,13 +48,14 @@
 <script>
 import { baseParams } from "../../../utils/base";
 import { breakpoint } from "../../../mixins/break_table_point";
-import { managerStore } from "../../../api/admin/store";
+import { managerStore, editStoreProduct } from "../../../api/admin/store";
 import { SEARCH_STORE_FORM_VALIDATION } from "../../../validations/admin";
 
 export default {
   mixins: [breakpoint],
   data() {
     return {
+      spinShow: false,
       searchForm: {
         data: { storeName: "", storeNo: "" },
         validation: SEARCH_STORE_FORM_VALIDATION
@@ -126,11 +135,7 @@ export default {
                     },
                     on: {
                       click: () => {
-                        this.$Notice.warning({
-                          title: "TODO",
-                          desc: "同步数据交互暂未完成"
-                        });
-                        // this.refresh(params.row.id);
+                        this.refresh(params.row.userNo);
                       }
                     }
                   },
@@ -202,7 +207,31 @@ export default {
     },
     handleCreate() {
       this.$router.push({ name: "store-create" });
+    },
+    refresh(storeNo) {
+      this.spinShow = true;
+      editStoreProduct({ storeNo })
+        .then(response => {
+          this.spinShow = false;
+          if (response.msg === "ok") {
+            this.$Notice.success({
+              title: "同步数据成功",
+              desc: `${response.result}`
+            });
+          } else {
+            this.$Message.warning("同步数据失败");
+          }
+        })
+        .catch(error => {
+          this.spinShow = false;
+          this.$Message.error("请求超时, 请稍后再试...");
+        });
     }
   }
 };
 </script>
+<style lang="less">
+.spin-icon-load {
+  animation: ani-demo-spin 1s linear infinite;
+}
+</style>

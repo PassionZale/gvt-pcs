@@ -33,3 +33,12 @@ export function listStorePros(data = baseParams) {
     url
   })
 }
+
+export function editStoreProduct(data) {
+  let api = '/commodity/editStoreProduct';
+  let url = serializeGetUrl(api, data)
+  return ajax({
+    method: 'get',
+    url
+  });
+}

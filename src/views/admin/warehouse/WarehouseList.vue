@@ -1,5 +1,12 @@
 <template>
-    <div>
+    <div style="position: relative;">
+
+      <!-- Loading -->
+      <Spin fix v-show="spinShow">
+        <Icon type="load-c" size=18 class="spin-icon-load"></Icon>
+        <div>正在同步数据,请稍后...</div>
+      </Spin>
+
       <!-- START 搜索表单 -->
       <Form ref="searchForm" :model="searchForm.data" :rules="searchForm.validation" inline>
           <FormItem prop="warehouseName">
@@ -40,13 +47,17 @@
 <script>
 import { baseParams } from "../../../utils/base";
 import { breakpoint } from "../../../mixins/break_table_point";
-import { managerWarehouse } from "../../../api/admin/warehouse";
+import {
+  managerWarehouse,
+  editWarehouseProduct
+} from "../../../api/admin/warehouse";
 import { SEARCH_WAREHOUSE_FORM_VALIDATION } from "../../../validations/admin";
 
 export default {
   mixins: [breakpoint],
   data() {
     return {
+      spinShow: false,
       searchForm: {
         data: { warehouseName: "", warehouseNo: "" },
         validation: SEARCH_WAREHOUSE_FORM_VALIDATION
@@ -130,11 +141,7 @@ export default {
                     },
                     on: {
                       click: () => {
-                        this.$Notice.warning({
-                          title: "TODO",
-                          desc: "同步数据交互暂未完成"
-                        });
-                        // this.refresh(params.row.id);
+                        this.refresh(params.row.warehouseNo);
                       }
                     }
                   },
@@ -206,7 +213,33 @@ export default {
     },
     handleCreate() {
       this.$router.push({ name: "warehouse-create" });
+    },
+    refresh(warehouseNo) {
+      this.spinShow = true;
+      editWarehouseProduct({ warehouseNo })
+        .then(response => {
+          this.spinShow = false;
+          if (response.msg === "ok") {
+            this.$Notice.success({
+              title: "同步数据成功",
+              desc: `${response.result}`
+            });
+          }else{
+            this.$Message.warning('同步数据失败')
+          }
+        })
+        .catch(error => {
+          this.spinShow = false;
+          this.$Message.error('请求超时, 请稍后再试...')
+        });
     }
   }
 };
 </script>
+
+<style lang="less">
+.spin-icon-load {
+  animation: ani-demo-spin 1s linear infinite;
+}
+</style>
+

@@ -1,6 +1,6 @@
 /**
  * 管理员
- * 门店管理 API LIST
+ * 仓库管理 API LIST
  */
 
 import ajax from '../../utils/ajax'
@@ -20,6 +20,14 @@ export function managerWarehouse(data = baseParams) {
 
 export function managerListWarehousePros(data = baseParams) {
   let api = '/warehouse/managerListWarehousePros';
+  let url = serializeGetUrl(api, data)
+  return ajax({
+    method: 'get',
+    url
+  });
+}
+export function editWarehouseProduct(data) {
+  let api = '/commodity/editWarehouseProduct';
   let url = serializeGetUrl(api, data)
   return ajax({
     method: 'get',
