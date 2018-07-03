@@ -8,7 +8,6 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
-
 // Let's Rock :P
 new Vue({
   router,

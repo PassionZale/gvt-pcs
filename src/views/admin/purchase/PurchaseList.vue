@@ -35,11 +35,11 @@
         <!-- /END 搜索表单 -->
 
         <!-- START DATA TABLE -->
-        <Table style="margin-bottom:24px;" stripe :loading="table.loading" :columns="table.columns" :data="table.data"></Table>
+        <Table :height="$breakpoint.tableHeight" style="margin-bottom:24px;" stripe :loading="table.loading" :columns="table.columns" :data="table.data"></Table>
         <!-- /END DATA TABLE -->
 
         <!-- START PAGESIZE-->
-        <Select v-model="pagination.pageSize" style="width:80px; display: inline-block;" @on-change="handlePageSizeChange">
+        <Select class="page-size-selector" v-model="pagination.pageSize" style="width:80px; display: inline-block;" @on-change="handlePageSizeChange">
             <Option v-for="item in pagination.pageSizeOpts" :value="item" :key="item">{{ `${item} 条/页` }}</Option>
         </Select>
         <!-- /END PAGESIZE -->
@@ -63,6 +63,7 @@
 
 <script>
 import { baseParams, parseAmount } from "../../../utils/base";
+import { breakpoint } from "../../../mixins/break_table_point";
 import {
   getAllStore,
   getAllwarehouse,
@@ -70,6 +71,7 @@ import {
 } from "../../../api/admin/purchase";
 import { SEARCH_PURCHASE_LIST_FORM_VALIDATION } from "../../../validations/admin";
 export default {
+  mixins: [breakpoint],
   data() {
     return {
       warehouses: [],

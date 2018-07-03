@@ -50,7 +50,7 @@
 <script>
 import { baseParams } from "../../../utils/base";
 import { listStorePros } from "../../../api/admin/store";
-import { breakpoint } from "../../../mixins/break_table_point.js";
+import { breakpoint } from "../../../mixins/break_table_point";
 import { SEARCH_STORE_PROS_FORM_VALIDATION } from "../../../validations/admin";
 export default {
   mixins: [breakpoint],

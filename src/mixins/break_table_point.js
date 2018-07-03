@@ -37,7 +37,8 @@ export const breakpoint = {
       let pageHeight = document.querySelector('.ivu-page').offsetHeight
       let pageSizeHeight = document.querySelector('.page-size-selector').offsetHeight
 
-      this.tableHeight = this.clientHeight - (this.headerHeight + this.footerHeight) - (breakcrumbHeight + formHeight + pageHeight + pageSizeHeight)
+      let tableHeight = this.clientHeight - (this.headerHeight + this.footerHeight) - (breakcrumbHeight + formHeight + pageHeight + pageSizeHeight)
+      this.tableHeight = tableHeight;
     },
   },
   mounted() {
