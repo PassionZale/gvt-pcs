@@ -92,3 +92,11 @@ export const SEARCH_PURCHASE_LIST_FORM_VALIDATION = {
   // 采购单号
   'buylistNo': [default_max_rule],
 }
+
+// 仓库管理 => 仓库列表 => 搜索仓库表单验证器
+export const SEARCH_WAREHOUSE_FORM_VALIDATION = {
+  // 仓库名称
+  'warehouseName': [default_max_rule],
+  // 仓库编号
+  'warehouseNo': [default_max_rule],
+}

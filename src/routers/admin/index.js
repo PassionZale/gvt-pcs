@@ -5,6 +5,7 @@ import storeRouter from './storeRouter'
 import systemRouter from './systemRouter'
 import purchaseRouter from './purchaseRouter'
 import orderRouter from './orderRouter'
+import warehouseRouter from './warehouseRouter'
 import errorPage from '../../views/404.vue'
 
 Vue.use(VueRouter);
@@ -28,14 +29,7 @@ export const RouterMap = [{
       systemRouter,
       purchaseRouter,
       orderRouter,
-      {
-        path: 'warehouse',
-        name: 'warehouse',
-        component: _import('Warehouse'),
-        meta: {
-          title: '仓库管理'
-        }
-      },
+      warehouseRouter,
     ]
   },
   {

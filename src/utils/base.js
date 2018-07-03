@@ -28,6 +28,8 @@ export function serializeGetUrl(url = '', data = {}) {
 }
 
 /**
+ * 序列化金额
+ * 12345.12 => 1,2345.12
  * 
  * @param {*} number 字符金额
  */
@@ -37,8 +39,7 @@ export function parseAmount(number) {
 
   try {
     amount = parseFloat(number).toLocaleString();
-  } catch (error) {
-    console.error(error)
-  }
+  } catch (error) {}
+
   return amount;
 }
