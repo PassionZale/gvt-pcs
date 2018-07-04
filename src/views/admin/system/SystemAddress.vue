@@ -21,27 +21,26 @@
 
         <!-- START DATA TABLE -->
         <Table :height="$breakpoint.tableHeight" style="margin-bottom:24px;" size="large" stripe :loading="table.loading" :columns="table.columns" :data="table.data"></Table>
+
+        <Row type="flex">
+          <Col span="2">
+            <Select class="page-size-selector" v-model="pagination.pageSize" @on-change="handlePageSizeChange">
+                <Option v-for="item in pagination.pageSizeOpts" :value="item" :key="item">{{ `${item} 条/页` }}</Option>
+            </Select>
+          </Col>
+          <Col span="22">
+            <Page 
+              :current.sync="pagination.current"
+              :total="pagination.total"
+              :page-size="pagination.pageSize"
+              show-total
+              show-elevator 
+              @on-change="handlePageChange"
+              >
+            </Page> 
+          </Col>
+        </Row>
         <!-- /END DATA TABLE -->
-
-        <!-- START PAGESIZE-->
-        <Select class="page-size-selector" v-model="pagination.pageSize" style="width:80px; display: inline-block;" @on-change="handlePageSizeChange">
-            <Option v-for="item in pagination.pageSizeOpts" :value="item" :key="item">{{ `${item} 条/页` }}</Option>
-        </Select>
-        <!-- /END PAGESIZE -->
-
-        <hr>
-
-        <!-- START PAGINATION -->
-        <Page 
-            :current.sync="pagination.current"
-            :total="pagination.total"
-            :page-size="pagination.pageSize"
-            show-total
-            show-elevator 
-            @on-change="handlePageChange"
-            >
-        </Page> 
-       <!-- /END PAGINATION -->
 
     </div>
 </template>

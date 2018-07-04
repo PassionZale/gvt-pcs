@@ -28,4 +28,7 @@ hr {
     z-index: 2 !important;
   }
 }
+.ivu-page-total {
+  margin: 0 10px;
+}
 </style>
