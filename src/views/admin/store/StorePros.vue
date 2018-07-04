@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { baseParams } from "../../../utils/base";
+import { baseParams, parseAmount } from "../../../utils/base";
 import { listStorePros } from "../../../api/admin/store";
 import { breakpoint } from "../../../mixins/break_table_point";
 import { SEARCH_STORE_PROS_FORM_VALIDATION } from "../../../validations/admin";
@@ -109,8 +109,20 @@ export default {
           { title: "门店数量", key: "stProCount" },
           { title: "门店有效期", key: "proBatchCode" },
           { title: "平均销售数量", key: "averageSales" },
-          { title: "商品卖价", key: "stProValue" },
-          { title: "商品Gst", key: "gstValue" }
+          {
+            title: "商品卖价",
+            key: "stProValue",
+            render: (h, params) => {
+              return h("strong", parseAmount(params.row.stProValue));
+            }
+          },
+          {
+            title: "商品Gst",
+            key: "gstValue",
+            render: (h, params) => {
+              return h("strong", parseAmount(params.row.gstValue));
+            }
+          }
         ]
       }
     };

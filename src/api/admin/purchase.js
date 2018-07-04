@@ -8,6 +8,7 @@ import {
   baseParams,
   serializeGetUrl
 } from '../../utils/base'
+import qs from 'qs'
 
 export function getAllStore() {
   return ajax({
@@ -41,6 +42,13 @@ export function manageListPurchasePros(data = baseParams) {
   })
 }
 
-export function getPurchaseStoreWarhouseInfo(){
-  
+export function getPurchaseStoreWarhouseInfo(data){
+  return ajax({
+    method: 'post',
+    url: '/purchase/getPurchaseStoreWarhouseInfo',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: qs.stringify(data)
+  })
 }

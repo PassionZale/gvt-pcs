@@ -41,5 +41,7 @@ export function parseAmount(number) {
     amount = parseFloat(number).toLocaleString();
   } catch (error) {}
 
+  isNaN(amount) && (amount = 0);
+
   return amount;
 }
