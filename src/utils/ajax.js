@@ -20,14 +20,6 @@ ajax.interceptors.request.use(config => {
 ajax.interceptors.response.use(response => {
   return response.data;
 }, error => {
-  Notice.error({
-    title: `${error.response.status} ERROR`,
-    desc: error.response.data,
-    duration: 0
-  });
-  // if (error.response.status >= 400) {
-  // TODO 跳转登录
-  // }
   return Promise.reject(error);
 });
 

@@ -6,6 +6,9 @@ import systemRouter from './systemRouter'
 import purchaseRouter from './purchaseRouter'
 import orderRouter from './orderRouter'
 import warehouseRouter from './warehouseRouter'
+
+import authLogin from '../../views/auth/LogIn'
+import authLogout from '../../views/auth/LogOut'
 import errorPage from '../../views/404.vue'
 
 Vue.use(VueRouter);
@@ -31,6 +34,22 @@ export const RouterMap = [{
       orderRouter,
       warehouseRouter,
     ]
+  },
+  {
+    path: '/login',
+    name: 'auth-login',
+    component: authLogin,
+    meta: {
+      title: '登录'
+    }
+  },
+  {
+    path: '/logout',
+    name: 'auth-logout',
+    component: authLogout,
+    meta: {
+      title: '注销'
+    }
   },
   {
     path: '*',

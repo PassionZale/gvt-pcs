@@ -47,7 +47,6 @@ export function updateConfrimOrder(data) {
   return ajax({
     method: 'post',
     url: '/system/updateConfrimOrder',
-    // 嗯哼, 有的接口参数是 JSON, 有的又要 key=value 字符串, 就问你怕不怕?
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
