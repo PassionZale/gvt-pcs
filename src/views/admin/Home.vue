@@ -9,7 +9,7 @@
                         快速入口
                     </p>
                     <Badge :count="entryData.storeNum">
-                        <Button type="primary" @click="handleEntry('warehouse')">门店绑定仓库申请</Button>              
+                        <Button type="primary" @click="handleEntry('store')">门店绑定仓库申请</Button>              
                     </Badge>
                     <Badge :count="entryData.warehouseNum">
                         <Button type="primary" @click="handleEntry('pros')">促销商品推送申请</Button>
@@ -41,7 +41,7 @@
                                 {{ row.createTime | timeAgo }}
                             </p>
                             <p class="content">
-                                <a href="javascript:;">{{ row | parseHomeNews }}</a>
+                                <a href="javascript:;" @click.prevent="handleEntry(row.userType === 'warehouse' ? 'pros' : 'store')">{{ row | parseHomeNews }}</a>
                             </p>
                         </TimelineItem>
                     </Timeline>

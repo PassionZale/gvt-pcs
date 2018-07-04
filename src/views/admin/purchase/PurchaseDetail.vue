@@ -66,7 +66,6 @@
         </Tabs>
         <!-- /END TABS-->
 
-
     </div>
 </template>
 

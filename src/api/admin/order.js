@@ -1,6 +1,6 @@
 /**
  * 管理员
- * 采购管理 API LIST
+ * 订单管理 API LIST
  */
 
 import ajax from '../../utils/ajax'

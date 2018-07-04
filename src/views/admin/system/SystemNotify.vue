@@ -30,7 +30,7 @@
         <!-- START TABS -->
         <Tabs :value="currentTab" :animated="false" @on-click="handleTabClick">
             <!-- START 绑定门店申请 -->
-            <TabPane label="仓库绑定门店申请" name="store">
+            <TabPane label="门店绑定申请" name="store">
                 <Table :height="$breakpoint.tableHeight" style="margin-bottom:24px;" size="large" stripe :loading="storeTable.loading" :data="storeTable.data" :columns="storeTable.columns"></Table>
                 <Select class="page-size-selector" v-model="storePagination.pageSize" style="width:80px; display: inline-block;" @on-change="handleStorePageSizeChange">
                   <Option v-for="item in storePagination.pageSizeOpts" :value="item" :key="item">{{ `${item} 条/页` }}</Option>
