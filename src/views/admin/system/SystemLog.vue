@@ -28,7 +28,7 @@
         <!-- /END 搜索表单 -->
 
         <!-- START DATA TABLE -->
-        <Table style="margin-bottom:24px;" stripe :loading="table.loading" :columns="table.columns" :data="table.data"></Table>
+        <Table style="margin-bottom:24px;" size="large" stripe :loading="table.loading" :columns="table.columns" :data="table.data"></Table>
         <!-- /END DATA TABLE -->
 
         <!-- START PAGESIZE-->

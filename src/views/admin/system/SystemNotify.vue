@@ -31,7 +31,7 @@
         <Tabs :value="currentTab" :animated="false" @on-click="handleTabClick">
             <!-- START 绑定门店申请 -->
             <TabPane label="仓库绑定门店申请" name="store">
-                <Table :height="$breakpoint.tableHeight" style="margin-bottom:24px;" stripe :loading="storeTable.loading" :data="storeTable.data" :columns="storeTable.columns"></Table>
+                <Table :height="$breakpoint.tableHeight" style="margin-bottom:24px;" size="large" stripe :loading="storeTable.loading" :data="storeTable.data" :columns="storeTable.columns"></Table>
                 <Select class="page-size-selector" v-model="storePagination.pageSize" style="width:80px; display: inline-block;" @on-change="handleStorePageSizeChange">
                   <Option v-for="item in storePagination.pageSizeOpts" :value="item" :key="item">{{ `${item} 条/页` }}</Option>
                 </Select>
@@ -50,7 +50,7 @@
 
             <!-- START 促销商品申请 -->
             <TabPane label="促销商品推送申请" name="pros">
-                <Table :height="$breakpoint.tableHeight" style="margin-bottom:24px;" stripe :loading="prosTable.loading" :data="prosTable.data" :columns="prosTable.columns"></Table>
+                <Table :height="$breakpoint.tableHeight" style="margin-bottom:24px;" size="large" stripe :loading="prosTable.loading" :data="prosTable.data" :columns="prosTable.columns"></Table>
                 <Select class="page-size-selector" v-model="prosPagination.pageSize" style="width:80px; display: inline-block;" @on-change="handleProsPageSizeChange">
                   <Option v-for="item in prosPagination.pageSizeOpts" :value="item" :key="item">{{ `${item} 条/页` }}</Option>
                 </Select>

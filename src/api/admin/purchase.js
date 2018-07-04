@@ -31,3 +31,16 @@ export function managerPurchase(data = baseParams) {
     url
   })
 }
+
+export function manageListPurchasePros(data = baseParams) {
+  let api = '/purchase/manageListPurchasePros';
+  let url = serializeGetUrl(api, data)
+  return ajax({
+    method: 'get',
+    url
+  })
+}
+
+export function getPurchaseStoreWarhouseInfo(){
+  
+}
