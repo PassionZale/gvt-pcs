@@ -6,7 +6,16 @@
 import ajax from '../../utils/ajax'
 import qs from 'qs'
 
-export function login(data) {
+/**
+ * 登录
+ * @param {Object} data 
+ * data = {
+ *    username,
+ *    password,
+ *    code
+ * }
+ */
+export function login(data = {}) {
   return ajax({
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -17,6 +26,9 @@ export function login(data) {
   });
 }
 
+/**
+ * 获取登录时需要的验证码图片
+ */
 export function fetchVerificationCode() {
   return ajax({
     method: 'get',
