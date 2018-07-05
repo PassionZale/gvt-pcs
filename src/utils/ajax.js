@@ -19,7 +19,7 @@ ajax.interceptors.response.use(response => {
   return response.data;
 }, error => {
   // 临时通过判断 'login-page' 判断用户的登录状态
-  if (error.response.request.responseURL.indexOf('login-page')) {
+  if (error.response.request.responseURL.indexOf('login-page') >= 0) {
     router.push('/login')
     return;
   }

@@ -28,7 +28,7 @@
                 </Row>
             </FormItem>
             <FormItem>
-                <Button type="primary" long @click="handleSubmit('loginForm')">登录</Button>
+                <Button type="primary" long :loading="btnLoading" @click="handleSubmit('loginForm')">{{ btnText }}</Button>
             </FormItem>
         </Form>
         </Col>
@@ -70,7 +70,7 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.login()
+          this.login();
         }
       });
     },
@@ -86,7 +86,7 @@ export default {
           });
         })
         .catch(error => {
-          this.$Message.error(error.msg)
+          this.$Message.error(error.response.data.msg);
           this.btnLoading = false;
         });
     },

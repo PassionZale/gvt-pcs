@@ -27,9 +27,9 @@ const user = {
           commit('SET_USERNAME', params.username)
           // 暂时硬编码为 admin
           commit('SET_ROLE', 'admin')
-          resolve(response)
+          resolve()
         }).catch(error => {
-          reject(error.response.data)
+          reject(error)
         })
       })
     },
@@ -40,7 +40,7 @@ const user = {
         logout().then(response => {
           resolve(response)
         }).catch(error => {
-          reject(error.response)
+          reject(error)
         })
       })
     }
