@@ -50,8 +50,8 @@
               :value="checkAll"
               @click.prevent.native="handleCheckAll">全选</Checkbox>
         </div>
-        <CheckboxGroup v-model="formData.checkedWarehouseList" @on-change="handleWarehouseChange">
-            <Checkbox v-for="item in warehouses" :key="item.warehouseId" :label="item.warehouseName"></Checkbox>
+        <CheckboxGroup v-model="selectedWarehouseStr" @on-change="handleWarehouseChange">
+            <Checkbox v-for="item in warehouses" :key="item.warehouseId" :label="item.warehouseId">{{item.warehouseName}}</Checkbox>
         </CheckboxGroup>
       </FormItem>
       <hr>
@@ -61,7 +61,7 @@
 
 <script>
 import { CREATE_STORE_FORM_VALIDATION } from "../../../validations/admin";
-import { getAllwarehouse } from "../../../api/admin/store";
+import { getAllwarehouse,managerStoreInfo } from "../../../api/admin/store";
 export default {
   data() {
     return {
@@ -69,8 +69,13 @@ export default {
       btnLoading: false,
       indeterminate: false,
       checkAll: false,
+      selectedWarehouseStr: [],
+      noSelectedWarehouseStr: [],
       formData: {
+        bind: "",
         userName: "",
+        userId: "",
+        userNo: "",
         passWord: "",
         storeName: "",
         editStoreNo: "",
@@ -84,15 +89,25 @@ export default {
         latitude: "",
         detailAddress: "",
         storeAbn: "",
-        checkedWarehouseList: []
+        isAddOrUpdate: "",
+        selectedWarehouseStr: "",//选中仓库
+        noSelectedWarehouseStr: "",//未选中仓库
       },
       formRule: CREATE_STORE_FORM_VALIDATION
     };
+  },
+  computed: {
+    $warehouseIds() {
+      return this.warehouses.map(item => {
+        return item.warehouseId
+      });
+    }
   },
   created() {
     getAllwarehouse()
       .then(response => {
         this.warehouses = response;
+        this.noSelectedWarehouseStr = this.$warehouseIds;
       })
       .catch();
   },
@@ -106,14 +121,16 @@ export default {
       this.indeterminate = false;
 
       if (this.checkAll) {
-        this.formData.checkedWarehouseList = this.warehouses.map(item => {
-          return item.warehouseName;
-        });
+        this.selectedWarehouseStr = this.$warehouseIds;
+        this.selectedWarehouseStr = [];
       } else {
-        this.formData.checkedWarehouseList = [];
+        this.selectedWarehouseStr = [];
       }
     },
     handleWarehouseChange(data) {
+      this.noSelectedWarehouseStr = this.$warehouseIds.filter(item => {
+        return this.selectedWarehouseStr.indexOf(item) === -1
+      });
       let len = this.warehouses.length;
       if (data.length === len) {
         this.indeterminate = false;
@@ -128,6 +145,27 @@ export default {
     },
     handleSubmit() {
       this.btnLoading = true;
+      let selectedWarehouseStr = '',noSelectedWarehouseStr = '';
+
+      this.selectedWarehouseStr.forEach(item =>{
+        selectedWarehouseStr += item + '~';
+      });
+      this.noSelectedWarehouseStr.forEach(item =>{
+        noSelectedWarehouseStr += item + '~';
+      });
+      this.formData.selectedWarehouseStr = selectedWarehouseStr;
+      this.formData.noSelectedWarehouseStr = noSelectedWarehouseStr;
+      this.formData.isAddOrUpdate = "add";
+      
+      managerStoreInfo(this.formData)
+        .then(response =>{
+          if(response.success)
+          {
+            this.$Message.success('操作成功');
+          }else {
+            this.$Message.success('操作失败');
+          }
+        });
     }
   }
 };

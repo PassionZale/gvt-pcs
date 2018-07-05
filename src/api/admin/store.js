@@ -33,3 +33,13 @@ export function listStorePros(data = baseParams) {
     url
   })
 }
+
+
+export function managerStoreInfo(data) {
+  return ajax({
+    method: 'post',
+    url: '/store/managerStoreInfo',
+    data
+  });
+}
+
