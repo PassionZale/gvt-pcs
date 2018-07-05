@@ -5,32 +5,28 @@
 
 import ajax from '../../utils/ajax'
 import {
-  baseParams,
-  serializeGetUrl
+  baseParams
 } from '../../utils/base'
 
 export function managerWarehouse(data = baseParams) {
-  let api = '/warehouse/managerWarehouse';
-  let url = serializeGetUrl(api, data)
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/warehouse/managerWarehouse',
+    data
   });
 }
 
 export function managerListWarehousePros(data = baseParams) {
-  let api = '/warehouse/managerListWarehousePros';
-  let url = serializeGetUrl(api, data)
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/warehouse/managerListWarehousePros',
+    data
   });
 }
-export function editWarehouseProduct(data) {
-  let api = '/commodity/editWarehouseProduct';
-  let url = serializeGetUrl(api, data)
+export function editWarehouseProduct(data = {}) {
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/commodity/editWarehouseProduct',
+    data
   });
 }

@@ -6,39 +6,36 @@
 import ajax from '../../utils/ajax'
 import {
   baseParams,
-  serializeGetUrl
 } from '../../utils/base'
 
 export function managerStore(data = baseParams) {
-  let api = '/store/managerStore';
-  let url = serializeGetUrl(api, data)
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/store/managerStore',
+    data
   });
 }
 
-export function getAllwarehouse() {
+export function getAllwarehouse(data = {}) {
   return ajax({
-    method: 'get',
-    url: '/warehouse/getAllwarehouse'
+    method: 'post',
+    url: '/warehouse/getAllwarehouse',
+    data
   })
 }
 
 export function listStorePros(data = baseParams) {
-  let api = '/store/listStorePros';
-  let url = serializeGetUrl(api, data)
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/store/listStorePros',
+    data
   })
 }
 
-export function editStoreProduct(data) {
-  let api = '/commodity/editStoreProduct';
-  let url = serializeGetUrl(api, data)
+export function editStoreProduct(data = {}) {
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/commodity/editStoreProduct',
+    data
   });
 }

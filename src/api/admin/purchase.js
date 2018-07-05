@@ -5,44 +5,43 @@
 
 import ajax from '../../utils/ajax'
 import {
-  baseParams,
-  serializeGetUrl
+  baseParams
 } from '../../utils/base'
 import qs from 'qs'
 
-export function getAllStore() {
+export function getAllStore(data = {}) {
   return ajax({
-    method: 'get',
-    url: '/store/getAllStore'
+    method: 'post',
+    url: '/store/getAllStore',
+    data
   })
 }
 
-export function getAllwarehouse() {
+export function getAllwarehouse(data = {}) {
   return ajax({
-    method: 'get',
-    url: '/store/getAllwarehouse'
+    method: 'post',
+    url: '/store/getAllwarehouse',
+    data
   })
 }
 
 export function managerPurchase(data = baseParams) {
-  let api = '/purchase/managerPurchase';
-  let url = serializeGetUrl(api, data)
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/purchase/managerPurchase',
+    data
   })
 }
 
 export function manageListPurchasePros(data = baseParams) {
-  let api = '/purchase/manageListPurchasePros';
-  let url = serializeGetUrl(api, data)
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/purchase/manageListPurchasePros',
+    data
   })
 }
 
-export function getPurchaseStoreWarhouseInfo(data){
+export function getPurchaseStoreWarhouseInfo(data = {}) {
   return ajax({
     method: 'post',
     url: '/purchase/getPurchaseStoreWarhouseInfo',

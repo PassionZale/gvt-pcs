@@ -6,24 +6,21 @@
 import ajax from '../../utils/ajax'
 import {
   baseParams,
-  serializeGetUrl
 } from '../../utils/base'
 
 export function managerOrder(data = baseParams) {
-  let api = '/order/managerOrder'
-  let url = serializeGetUrl(api, data)
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/order/managerOrder',
+    data
   })
 }
 
 export function managerListOrderPros(data = baseParams) {
-  let api = '/order/managerListOrderPros'
-  let url = serializeGetUrl(api, data)
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/order/managerListOrderPros',
+    data
   })
 
 }

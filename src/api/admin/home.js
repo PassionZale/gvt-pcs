@@ -5,8 +5,7 @@
 
 import ajax from '../../utils/ajax'
 import {
-  baseParams,
-  serializeGetUrl
+  baseParams
 } from '../../utils/base'
 
 export function systemIndex(data = baseParams) {
