@@ -32,7 +32,6 @@ export function listStorePros(data = baseParams) {
   })
 }
 
-<<<<<<< HEAD
 
 export function managerStoreInfo(data) {
   return ajax({
@@ -42,7 +41,6 @@ export function managerStoreInfo(data) {
   });
 }
 
-=======
 export function editStoreProduct(data = {}) {
   return ajax({
     method: 'post',
@@ -50,4 +48,3 @@ export function editStoreProduct(data = {}) {
     data
   });
 }
->>>>>>> 30dee432a831ec67e2237a653503bf4a896b34a3
