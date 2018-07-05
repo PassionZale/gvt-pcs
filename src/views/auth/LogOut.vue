@@ -1,7 +1,8 @@
 <template>
-    <h1>采购</h1>
+<p>Log Out</p>
 </template>
 
 <script>
 export default {};
 </script>
+

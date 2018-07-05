@@ -5,8 +5,7 @@
 
 import ajax from '../../utils/ajax'
 import {
-  baseParams,
-  serializeGetUrl
+  baseParams
 } from '../../utils/base'
 
 export function systemIndex(data = baseParams) {
@@ -18,19 +17,17 @@ export function systemIndex(data = baseParams) {
 }
 
 export function getAllStoreOrder(data = baseParams) {
-  let api = '/store/getAllStoreOrder';
-  let url = serializeGetUrl(api, data)
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/store/getAllStoreOrder',
+    data
   });
 }
 
 export function getAllWarehouseOrder(data = baseParams) {
-  let api = '/warehouse/getAllWarehouseOrder';
-  let url = serializeGetUrl(api, data)
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/warehouse/getAllWarehouseOrder',
+    data
   });
 }

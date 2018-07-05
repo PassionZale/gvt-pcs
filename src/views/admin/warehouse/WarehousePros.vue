@@ -14,11 +14,6 @@
         <FormItem label="商品条码:" prop="proBarcode">
             <Input type="text" v-model="form.data.proBarcode" placeholder="请输入商品条码"></Input>
         </FormItem>
-        <FormItem label="统计方式:" prop="statiStatus">
-            <Select v-model="form.data.statiStatus" placeholder="请选择统计方式">
-                <Option v-for="item in statis" :key="item.value" :value="item.value">{{ item.label }}</Option>
-            </Select>
-        </FormItem>
         <FormItem>
             <Button type="primary" @click="handleSubmit('searchForm')">搜索</Button>
             <Button type="ghost" @click="handleReset('searchForm')" style="margin: 0 8px;">重置</Button>
@@ -53,8 +48,8 @@
 </template>
 
 <script>
-import { baseParams, parseAmount } from "../../../utils/base";
-import { listStorePros } from "../../../api/admin/store";
+import { baseParams } from "../../../utils/base";
+import { managerListWarehousePros } from "../../../api/admin/warehouse";
 import { breakpoint } from "../../../mixins/break_table_point";
 import { SEARCH_STORE_PROS_FORM_VALIDATION } from "../../../validations/admin";
 export default {
@@ -62,22 +57,6 @@ export default {
 
   data() {
     return {
-      // 统计方式
-      statis: [
-        {
-          value: 1,
-          label: "日"
-        },
-        {
-          value: 2,
-          label: "周"
-        },
-        {
-          value: 3,
-          label: "月"
-        }
-      ],
-
       form: {
         data: {
           // 商品品牌
@@ -88,10 +67,8 @@ export default {
           proName: "",
           // 商品条码
           proBarcode: "",
-          // 统计方式
-          statiStatus: 0,
           // 商品名称
-          storeName: this.$route.params.storeName
+          warehouseName: this.$route.params.warehouseName
         },
         rules: SEARCH_STORE_PROS_FORM_VALIDATION
       },
@@ -111,30 +88,13 @@ export default {
           { title: "商品条码", key: "proBarcode" },
           { title: "商品品牌", key: "proBrand" },
           { title: "商品类别", key: "proCategoryName" },
-          { title: "门店数量", key: "stProCount" },
-          { title: "门店有效期", key: "proBatchCode" },
-          { title: "平均销售数量", key: "averageSales" },
-          {
-            title: "商品卖价",
-            key: "stProValue",
-            render: (h, params) => {
-              return h("strong", parseAmount(params.row.stProValue));
-            }
-          },
-          {
-            title: "商品Gst",
-            key: "gstValue",
-            render: (h, params) => {
-              return h("strong", parseAmount(params.row.gstValue));
-            }
-          }
+          { title: "在库数量", key: "whProQuantityAble" },
+          { title: "库存有效期", key: "whProBatch" },
+          { title: "库存成本价", key: "proPrice" },
+          { title: "商品Gst", key: "gstValue" }
         ]
       }
     };
-  },
-
-  watch: {
-    "form.data.statiStatus": { handler: "handleStatiChange" }
   },
 
   methods: {
@@ -144,7 +104,7 @@ export default {
       let rows = this.pagination.pageSize;
       let options = Object.assign({}, baseParams, { page, rows });
       let params = Object.assign({}, options, this.form.data);
-      listStorePros(params)
+      managerListWarehousePros(params)
         .then(response => {
           this.pagination.total = response.total;
           this.table.data = response.rows;
@@ -173,11 +133,6 @@ export default {
     },
     handleReset(name) {
       this.$refs[name].resetFields();
-    },
-    handleStatiChange(newVal) {
-      if (newVal === undefined) {
-        this.form.data.statiStatus = 0;
-      }
     }
   }
 };

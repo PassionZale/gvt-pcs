@@ -1,7 +1,8 @@
 <template>
-    <h1>订单</h1>
+    <p>仓库创建</p>
 </template>
 
 <script>
 export default {};
 </script>
+

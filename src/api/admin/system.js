@@ -6,7 +6,6 @@
 import ajax from '../../utils/ajax'
 import {
   baseParams,
-  serializeGetUrl
 } from '../../utils/base'
 import qs from 'qs'
 
@@ -26,7 +25,7 @@ export function goodsNotices(data = baseParams) {
   })
 }
 
-export function getGoodsDetail(data){
+export function getGoodsDetail(data = {}) {
   return ajax({
     method: 'post',
     url: '/notices/getGoodsDetail',
@@ -34,20 +33,29 @@ export function getGoodsDetail(data){
   })
 }
 
-export function selectAdminListOfOrders(data = baseParams){
-  let api = '/system/selectAdminListOfOrders';
-  let url = serializeGetUrl(api, data)
+export function selectAdminListOfOrders(data = baseParams) {
   return ajax({
-    method: 'get',
-    url
+    method: 'post',
+    url: '/system/selectAdminListOfOrders',
+    data
   });
 }
 
-export function updateConfrimOrder(data){
+export function updateConfrimOrder(data = {}) {
   return ajax({
     method: 'post',
     url: '/system/updateConfrimOrder',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
     data: qs.stringify(data)
+  })
+}
+
+export function managerSystemUserLogs(data = baseParams) {
+  return ajax({
+    method: 'post',
+    url: '/system/managerSystemUserLogs',
+    data
   })
 }

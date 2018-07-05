@@ -30,40 +30,50 @@
         <!-- START TABS -->
         <Tabs :value="currentTab" :animated="false" @on-click="handleTabClick">
             <!-- START 绑定门店申请 -->
-            <TabPane label="仓库绑定门店申请" name="store">
-                <Table style="margin-bottom:24px;" stripe :loading="storeTable.loading" :data="storeTable.data" :columns="storeTable.columns"></Table>
-                <Select v-model="storePagination.pageSize" style="width:80px; display: inline-block;" @on-change="handleStorePageSizeChange">
-                  <Option v-for="item in storePagination.pageSizeOpts" :value="item" :key="item">{{ `${item} 条/页` }}</Option>
-                </Select>
-                <hr>
-                <Page 
-                    :current.sync="storePagination.current"
-                    :total="storePagination.total"
-                    :page-size="storePagination.pageSize"
-                    show-total
-                    show-elevator 
-                    @on-change="handleStorePageChange"
-                    >
-                </Page> 
+            <TabPane label="门店绑定申请" name="store">
+                <Table :height="$breakpoint.tableHeight" style="margin-bottom:24px;" size="large" stripe :loading="storeTable.loading" :data="storeTable.data" :columns="storeTable.columns"></Table>
+                <Row type="flex">
+                  <Col span="2">
+                    <Select class="page-size-selector" v-model="storePagination.pageSize" @on-change="handleStorePageSizeChange">
+                      <Option v-for="item in storePagination.pageSizeOpts" :value="item" :key="item">{{ `${item} 条/页` }}</Option>
+                    </Select>
+                  </Col>
+                  <Col span="22">
+                    <Page 
+                      :current.sync="storePagination.current"
+                      :total="storePagination.total"
+                      :page-size="storePagination.pageSize"
+                      show-total
+                      show-elevator 
+                      @on-change="handleStorePageChange"
+                      >
+                    </Page> 
+                  </Col>
+                </Row>
             </TabPane>
             <!-- /END 绑定门店申请 -->
 
             <!-- START 促销商品申请 -->
             <TabPane label="促销商品推送申请" name="pros">
-                <Table style="margin-bottom:24px;" stripe :loading="prosTable.loading" :data="prosTable.data" :columns="prosTable.columns"></Table>
-                <Select v-model="prosPagination.pageSize" style="width:80px; display: inline-block;" @on-change="handleProsPageSizeChange">
-                  <Option v-for="item in prosPagination.pageSizeOpts" :value="item" :key="item">{{ `${item} 条/页` }}</Option>
-                </Select>
-                <hr>
-                <Page 
-                    :current.sync="prosPagination.current"
-                    :total="prosPagination.total"
-                    :page-size="prosPagination.pageSize"
-                    show-total
-                    show-elevator 
-                    @on-change="handleProsPageChange"
-                    >
-                </Page> 
+                <Table :height="$breakpoint.tableHeight" style="margin-bottom:24px;" size="large" stripe :loading="prosTable.loading" :data="prosTable.data" :columns="prosTable.columns"></Table>
+                <Row type="flex">
+                  <Col span="2">
+                    <Select class="page-size-selector" v-model="prosPagination.pageSize" @on-change="handleProsPageSizeChange">
+                      <Option v-for="item in prosPagination.pageSizeOpts" :value="item" :key="item">{{ `${item} 条/页` }}</Option>
+                    </Select>
+                  </Col>
+                  <Col span="22">
+                    <Page 
+                      :current.sync="prosPagination.current"
+                      :total="prosPagination.total"
+                      :page-size="prosPagination.pageSize"
+                      show-total
+                      show-elevator 
+                      @on-change="handleProsPageChange"
+                      >
+                    </Page> 
+                  </Col>
+                </Row>
             </TabPane>
             <!-- /END 促销商品申请 -->
         </Tabs>
@@ -88,6 +98,7 @@
 
 <script>
 import { baseParams } from "../../../utils/base";
+import { breakpoint } from "../../../mixins/break_table_point";
 import { SEARCH_SYSTEM_NOTIFY_FORM_VALIDATION } from "../../../validations/admin";
 import {
   storeNotices,
@@ -95,6 +106,7 @@ import {
   getGoodsDetail
 } from "../../../api/admin/system";
 export default {
+  mixins: [breakpoint],
   data() {
     return {
       currentTab: "store",
@@ -137,16 +149,61 @@ export default {
               if (params.row.state === 0) {
                 // 同意 & 拒绝 按钮 SHOW
                 // TODO 交互
-                return h('div', [
-                  h('Button', {style: {marginRight: "5px"}, props:{type:'success',size:'small',icon:'checkmark', on:{click:() => {}}}}, '同意'),
-                  h('Button', {props:{type:'error',size:'small',icon:'close-round', on:{click:() => {}}}}, '拒绝')
-                ])
-              }else if(params.row.state === 1){
+                return h("div", [
+                  h(
+                    "Button",
+                    {
+                      style: { marginRight: "5px" },
+                      props: {
+                        type: "success",
+                        size: "small",
+                        icon: "checkmark",
+                        on: { click: () => {} }
+                      }
+                    },
+                    "同意"
+                  ),
+                  h(
+                    "Button",
+                    {
+                      props: {
+                        type: "error",
+                        size: "small",
+                        icon: "close-round",
+                        on: { click: () => {} }
+                      }
+                    },
+                    "拒绝"
+                  )
+                ]);
+              } else if (params.row.state === 1) {
                 // 已同意 按钮 DISABLED
-                return h('Button', {props:{type:'success',size:'small',icon:'checkmark', disabled:true}}, '已同意')
-              }else{
+                return h(
+                  "Button",
+                  {
+                    props: {
+                      type: "success",
+                      size: "small",
+                      icon: "checkmark",
+                      disabled: true
+                    }
+                  },
+                  "已同意"
+                );
+              } else {
                 // 已拒绝 按钮 DISABLED
-                return h('Button', {props:{type:'error',size:'small',icon:'close-round', disabled:true}}, '已拒绝')
+                return h(
+                  "Button",
+                  {
+                    props: {
+                      type: "error",
+                      size: "small",
+                      icon: "close-round",
+                      disabled: true
+                    }
+                  },
+                  "已拒绝"
+                );
               }
             }
           }

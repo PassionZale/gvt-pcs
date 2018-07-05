@@ -7,25 +7,25 @@
         <div>正在同步数据,请稍后...</div>
       </Spin>
 
-
       <!-- START 搜索表单 -->
       <Form ref="searchForm" :model="searchForm.data" :rules="searchForm.validation" inline>
-          <FormItem prop="storeName">
-              <Input type="text" v-model="searchForm.data.storeName" placeholder="请输入门店名称"></Input>
+          <FormItem prop="warehouseName">
+              <Input type="text" v-model="searchForm.data.warehouseName" placeholder="请输入仓库名称"></Input>
           </FormItem>
-          <FormItem prop="storeNo">
-              <Input type="text" v-model="searchForm.data.storeNo" placeholder="请输入门店编号"></Input>
+          <FormItem prop="warehouseNo">
+              <Input type="text" v-model="searchForm.data.warehouseNo" placeholder="请输入仓库编号"></Input>
           </FormItem>
           <FormItem>
               <Button type="primary" @click="handleSubmit('searchForm')">搜索</Button>
               <Button type="ghost" @click="handleReset('searchForm')" style="margin: 0 8px;">重置</Button>
-              <Button type="ghost" @click="handleCreate" icon="plus">门店创建</Button>
+              <Button type="ghost" @click="handleCreate" icon="plus">仓库创建</Button>
           </FormItem>
       </Form>
       <!-- /END 搜索表单 -->
 
       <!-- START 数据展示 -->
       <Table :height="$breakpoint.tableHeight" style="margin-bottom:24px;" size="large" stripe :loading="table.loading" :columns="table.columns" :data="table.data"></Table>
+
       <Row type="flex">
         <Col span="2">
           <Select class="page-size-selector" v-model="pagination.pageSize" @on-change="handlePageSizeChange">
@@ -52,8 +52,11 @@
 <script>
 import { baseParams } from "../../../utils/base";
 import { breakpoint } from "../../../mixins/break_table_point";
-import { managerStore, editStoreProduct } from "../../../api/admin/store";
-import { SEARCH_STORE_FORM_VALIDATION } from "../../../validations/admin";
+import {
+  managerWarehouse,
+  editWarehouseProduct
+} from "../../../api/admin/warehouse";
+import { SEARCH_WAREHOUSE_FORM_VALIDATION } from "../../../validations/admin";
 
 export default {
   mixins: [breakpoint],
@@ -61,8 +64,8 @@ export default {
     return {
       spinShow: false,
       searchForm: {
-        data: { storeName: "", storeNo: "" },
-        validation: SEARCH_STORE_FORM_VALIDATION
+        data: { warehouseName: "", warehouseNo: "" },
+        validation: SEARCH_WAREHOUSE_FORM_VALIDATION
       },
       pagination: {
         current: 1,
@@ -75,48 +78,52 @@ export default {
         data: [],
         columns: [
           {
-            title: "门店名称",
-            key: "storeName",
+            title: "仓库名称",
+            key: "warehouseName",
             render: (h, params) => {
               return h(
                 "a",
                 {
                   attrs: {
-                    title: `点击查看${params.row.storeName}门店商品列表`,
-                    href: `#/store/pros/${params.row.storeName}`
+                    title: `点击查看${params.row.warehouseName}门店商品列表`,
+                    href: `#/warehouse/pros/${params.row.warehouseName}`
                   }
                 },
-                params.row.storeName
+                params.row.warehouseName
               );
             }
           },
-          { title: "门店编号", key: "userNo" },
-          { title: "门店地址", key: "warehouseAddress" },
+          { title: "仓库编号", key: "warehouseNo" },
+          { title: "仓库地址", key: "warehouseAddress" },
           {
             title: "创建时间",
-            key: "bindAddtime",
+            key: "warehouseAddtime",
             render: (h, params) => {
-              return h("span", params.row.bindAddtime.replace(".0", ""));
+              let time = "";
+              try {
+                time = params.row.warehouseAddtime.replace(".0", "");
+              } catch (error) {}
+              return h("span", time);
             }
           },
           {
-            title: "门店状态",
-            key: "signingStatus",
+            title: "仓库状态",
+            key: "warehouseStatus",
             render: (h, params) => {
-              let len = params.row.bindedWarehouseList.length;
+              let len = params.row.bindedStoreList.length;
               let text = len > 0 ? "已签约" : "未签约";
               let color = len > 0 ? "green" : "default";
               return h("Tag", { props: { color: color } }, [text]);
             }
           },
           {
-            title: "绑定仓库",
-            key: "bindedWarehouseList",
+            title: "关联门店",
+            key: "bindedStoreList",
             render: (h, params) => {
               return h(
                 "div",
-                params.row.bindedWarehouseList.map(item => {
-                  return h("Tag", [item.warehouseName]);
+                params.row.bindedStoreList.map(item => {
+                  return h("Tag", [item.storeName]);
                 })
               );
             }
@@ -139,7 +146,7 @@ export default {
                     },
                     on: {
                       click: () => {
-                        this.refresh(params.row.userNo);
+                        this.refresh(params.row.warehouseNo);
                       }
                     }
                   },
@@ -157,7 +164,7 @@ export default {
                       click: () => {
                         this.$Notice.warning({
                           title: "TODO",
-                          desc: "获取指定门店数据 API MISSING"
+                          desc: "获取指定仓库数据 API MISSING"
                         });
                         //this.edit(params);
                       }
@@ -179,7 +186,7 @@ export default {
       let rows = this.pagination.pageSize;
       let options = Object.assign({}, baseParams, { page, rows });
       let params = Object.assign({}, options, this.searchForm.data);
-      managerStore(params)
+      managerWarehouse(params)
         .then(response => {
           this.pagination.total = response.total;
           this.table.data = response.rows;
@@ -210,11 +217,11 @@ export default {
       this.$refs[name].resetFields();
     },
     handleCreate() {
-      this.$router.push({ name: "store-create" });
+      this.$router.push({ name: "warehouse-create" });
     },
-    refresh(storeNo) {
+    refresh(warehouseNo) {
       this.spinShow = true;
-      editStoreProduct({ storeNo })
+      editWarehouseProduct({ warehouseNo })
         .then(response => {
           this.spinShow = false;
           if (response.msg === "ok") {
@@ -222,20 +229,22 @@ export default {
               title: "同步数据成功",
               desc: `${response.result}`
             });
-          } else {
-            this.$Message.warning("同步数据失败");
+          }else{
+            this.$Message.warning('同步数据失败')
           }
         })
         .catch(error => {
           this.spinShow = false;
-          this.$Message.error("请求超时, 请稍后再试...");
+          this.$Message.error('请求超时, 请稍后再试...')
         });
     }
   }
 };
 </script>
+
 <style lang="less">
 .spin-icon-load {
   animation: ani-demo-spin 1s linear infinite;
 }
 </style>
+

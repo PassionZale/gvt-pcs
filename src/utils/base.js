@@ -16,8 +16,8 @@ export const baseParams = {
 /**
  * 序列化 GET 请求地址
  * 
- * @param {*} url API 地址
- * @param {*} data GET Request Params
+ * @param {String} url API 地址
+ * @param {Object} data GET Request Params
  */
 export function serializeGetUrl(url = '', data = {}) {
   let params = qs.stringify(data);
@@ -25,4 +25,23 @@ export function serializeGetUrl(url = '', data = {}) {
     url += `?${qs.stringify(data)}`;
   }
   return url;
+}
+
+/**
+ * 序列化金额
+ * 12345.12 => 1,2345.12
+ * 
+ * @param {*} number 字符金额
+ */
+export function parseAmount(number) {
+
+  let amount = 0;
+
+  try {
+    amount = parseFloat(number).toLocaleString();
+  } catch (error) {}
+
+  isNaN(amount) && (amount = 0);
+
+  return amount;
 }

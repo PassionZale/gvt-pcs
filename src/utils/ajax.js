@@ -2,9 +2,7 @@ import axios from 'axios'
 import {
   baseURL
 } from './base'
-import {
-  Notice
-} from 'iview'
+import router from '../routers/admin'
 
 const ajax = axios.create({
   baseURL: baseURL,
@@ -20,14 +18,11 @@ ajax.interceptors.request.use(config => {
 ajax.interceptors.response.use(response => {
   return response.data;
 }, error => {
-  Notice.error({
-    title: `${error.response.status} ERROR`,
-    desc: error.response.data,
-    duration: 0
-  });
-  // if (error.response.status >= 400) {
-  // TODO 跳转登录
-  // }
+  // 临时通过判断 'login-page' 判断用户的登录状态
+  if (error.response.request.responseURL.indexOf('login-page') >= 0) {
+    router.push('/login')
+    return;
+  }
   return Promise.reject(error);
 });
 

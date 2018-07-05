@@ -89,9 +89,14 @@ export default {
         latitude: "",
         detailAddress: "",
         storeAbn: "",
+<<<<<<< HEAD
         isAddOrUpdate: "",
         selectedWarehouseStr: "",//选中仓库
         noSelectedWarehouseStr: "",//未选中仓库
+=======
+        checkedWarehouseList: [],
+        unCheckedWarehouseList: []
+>>>>>>> 30dee432a831ec67e2237a653503bf4a896b34a3
       },
       formRule: CREATE_STORE_FORM_VALIDATION
     };
@@ -99,7 +104,11 @@ export default {
   computed: {
     $warehouseIds() {
       return this.warehouses.map(item => {
+<<<<<<< HEAD
         return item.warehouseId
+=======
+        return item.warehouseId;
+>>>>>>> 30dee432a831ec67e2237a653503bf4a896b34a3
       });
     }
   },
@@ -107,7 +116,11 @@ export default {
     getAllwarehouse()
       .then(response => {
         this.warehouses = response;
+<<<<<<< HEAD
         this.noSelectedWarehouseStr = this.$warehouseIds;
+=======
+        this.formData.unCheckedWarehouseList = this.$warehouseIds;
+>>>>>>> 30dee432a831ec67e2237a653503bf4a896b34a3
       })
       .catch();
   },
@@ -121,6 +134,7 @@ export default {
       this.indeterminate = false;
 
       if (this.checkAll) {
+<<<<<<< HEAD
         this.selectedWarehouseStr = this.$warehouseIds;
         this.selectedWarehouseStr = [];
       } else {
@@ -130,6 +144,18 @@ export default {
     handleWarehouseChange(data) {
       this.noSelectedWarehouseStr = this.$warehouseIds.filter(item => {
         return this.selectedWarehouseStr.indexOf(item) === -1
+=======
+        this.formData.checkedWarehouseList = this.$warehouseIds;
+        this.formData.unCheckedWarehouseList = [];
+      } else {
+        this.formData.checkedWarehouseList = [];
+        this.formData.unCheckedWarehouseList = this.$warehouseIds;
+      }
+    },
+    handleWarehouseChange(data) {
+      this.formData.unCheckedWarehouseList = this.$warehouseIds.filter(item => {
+        return this.formData.checkedWarehouseList.indexOf(item) === -1
+>>>>>>> 30dee432a831ec67e2237a653503bf4a896b34a3
       });
       let len = this.warehouses.length;
       if (data.length === len) {
@@ -156,7 +182,7 @@ export default {
       this.formData.selectedWarehouseStr = selectedWarehouseStr;
       this.formData.noSelectedWarehouseStr = noSelectedWarehouseStr;
       this.formData.isAddOrUpdate = "add";
-      
+
       managerStoreInfo(this.formData)
         .then(response =>{
           if(response.success)

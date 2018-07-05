@@ -23,9 +23,12 @@ hr {
 }
 .router-link-active {
   li {
-    color: #2d8cf0;
-    border-right: 2px solid #2d8cf0;
-    z-index: 2;
+    color: #2d8cf0 !important;
+    border-right: 2px solid #2d8cf0 !important;
+    z-index: 2 !important;
   }
+}
+.ivu-page-total {
+  margin: 0 10px;
 }
 </style>
