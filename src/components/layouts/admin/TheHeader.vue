@@ -17,18 +17,22 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-    data(){
-        return {
-            user: {
-                username: 'admin'
-            }
-        }
-    },
+  computed: {
+    ...mapGetters(["user"])
+  },
   methods: {
-      logout(){
-        return false;
-      }
+    logout() {
+      this.$store
+        .dispatch("LogOut")
+        .then(response => {
+          this.$router.push("/login");
+        })
+        .catch(error => {
+          this.$router.push("/login");
+        });
+    }
   }
 };
-</script>
+</script> 

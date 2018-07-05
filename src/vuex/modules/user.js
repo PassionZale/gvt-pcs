@@ -1,12 +1,12 @@
 import {
-  login
+  login,
+  logout
 } from '../../api/auth'
 
 const user = {
   state: {
     username: '',
     role: '',
-    logged: false,
   },
 
   mutations: {
@@ -24,14 +24,25 @@ const user = {
     }, params) {
       return new Promise((resolve, reject) => {
         login(params).then(response => {
+          commit('SET_USERNAME', params.username)
+          // 暂时硬编码为 admin
+          commit('SET_ROLE', 'admin')
           resolve(response)
         }).catch(error => {
           reject(error.response.data)
         })
       })
     },
-    LogOut() {
-      // TODO
+    LogOut({
+      commit
+    }) {
+      return new Promise((resolve, reject) => {
+        logout().then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error.response)
+        })
+      })
     }
   }
 }

@@ -18,7 +18,7 @@
             <FormItem prop="code">
                 <Row type="flex">
                   <Col span="18" class="verify-code-wrapper">
-                    <Input type="text" v-model="form.data.code" size="large" clearable placeholder="请输入验证码">
+                    <Input type="text" v-model="form.data.code" size="large" @keyup.enter.native="handleSubmit('loginForm')" clearable placeholder="请输入验证码">
                       <Icon type="code" slot="prepend"></Icon>
                     </Input>
                   </Col>
@@ -80,8 +80,6 @@ export default {
       this.$store
         .dispatch("LogIn", this.form.data)
         .then(response => {
-          console.log(3)
-          console.log(response)
           this.btnText = "登录成功，正在跳转...";
           this.$nextTick(() => {
             this.$router.push("/");

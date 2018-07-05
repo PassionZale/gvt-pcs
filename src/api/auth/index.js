@@ -36,3 +36,18 @@ export function fetchVerificationCode() {
     url: `/vc?${Math.random()}`
   })
 }
+
+/**
+ * 登出
+ * @param {Object} data 
+ */
+export function logout(data = {}) {
+  return ajax({
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    method: 'post',
+    url: '/logout',
+    data: qs.stringify(data),
+  });
+}
