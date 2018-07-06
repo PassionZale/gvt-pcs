@@ -59,3 +59,16 @@ export function managerSystemUserLogs(data = baseParams) {
     data
   })
 }
+
+
+/**
+ * 接口解析模板 新增
+ */
+export function addParseModelInfo(data = {}) {
+  console.log(data)
+  return ajax({
+    method: 'post',
+    url: "/addParseModelInfo",
+    data
+  })
+}

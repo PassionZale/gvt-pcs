@@ -9,6 +9,30 @@ const systemRouter = {
     title: '系统管理'
   },
   children: [{
+      path: 'report',
+      name: 'system-report',
+      redirect: '/system/report/list',
+      component: _import('system/SystemReportIndex'),
+      meta: {
+        title: '接口报表'
+      },
+      children: [{
+        path: 'list',
+        name: 'system-report-list',
+        component: _import('system/SystemReportList'),
+        meta: {
+          title: '接口报表列表'
+        }
+      }, {
+        path: 'detail/:id',
+        name: 'system-report-detail',
+        component: _import('system/SystemReportDetail'),
+        meta: {
+          title: '接口报表详情'
+        }
+      }]
+    },
+    {
       path: 'param',
       name: 'system-param',
       component: _import('system/SystemParam'),

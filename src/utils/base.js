@@ -2,7 +2,7 @@ import qs from 'qs'
 
 // 根据 Nodejs 环境变量区分不同的 DOMAIN
 export const baseURL = process.env.NODE_ENV === 'production' ?
-  'http://production.gvt.com' :
+  '' :
   '/api';
 
 

@@ -14,6 +14,7 @@ Object.keys(filters).forEach(key => {
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
+  // TODO 用户信息拉取 & 登录拦截器
   next();
 });
 

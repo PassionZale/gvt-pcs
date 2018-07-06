@@ -52,6 +52,12 @@
 
         <!--系统管理-->
         <MenuGroup title="系统管理">
+            <router-link :to="{path: '/system/report'}">
+                <MenuItem name="system-report">
+                    <Icon type="document-text"></Icon>
+                    接口报表
+                </MenuItem>
+            </router-link>
             <router-link :to="{path: '/system/param'}">
                 <MenuItem name="system-param">
                     <Icon type="gear-a"></Icon>
